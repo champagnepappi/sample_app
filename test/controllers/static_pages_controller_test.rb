@@ -30,4 +30,16 @@ class StaticPagesControllerTest < ActionController::TestCase
     assert_select "h5", "Its me again testing"
   end
 
+  test "should get cv" do
+    get :cv
+    assert_response :success
+    assert_select "h1", "WELCOME TO MY WORLD"
+    assert_select "h2", "Contact Me"
+    assert_select "li", "About"
+    assert_select "p" , "Online"
+    assert_select "p" , "Email"
+    assert_select "p" , "Bondo"
+    assert_select "div", "Copyrights 2016"
+    assert_select "title", "CV | #{@base_title}"
+end
 end
