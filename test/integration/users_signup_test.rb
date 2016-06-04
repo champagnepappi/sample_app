@@ -16,5 +16,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   		post_via_redirect users_path, user: { name: "Example User", email: "user@example.com", password: "password", password_confirmation: "password"}
   	end
   	assert_template 'users/new'
+  	assert_select 'div#<CSS id for error explanation>'
+  	assert_select 'div.<CSS class for field with error>'
+  	assert_not flash.FILL_IN
   end
 end
