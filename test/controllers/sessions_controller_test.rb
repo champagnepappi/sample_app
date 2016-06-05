@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
-    get 'sessions/show'
+    get sessions_new_url
     assert_response :success
   end
 
