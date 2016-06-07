@@ -2,3 +2,8 @@ kevin:
   name: kevin santos
   email: ksantos@gmail.com
   password_digest: <%= User.digest('password') %>
+
+junior:
+  name: kobe junior
+  email: kobe@gmail.com
+  password_digest: <%= User.digest('password') %>  
