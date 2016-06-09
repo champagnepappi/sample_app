@@ -6,8 +6,7 @@ class MicropostTest < ActiveSupport::TestCase
   # end
   def setup
   	@user = users(:kevin)
-  	#this code is not ideomatically correct
-  	@micropost = Micropost.new(content: "Lorem ipsum", user_id: @user.id)
+  	@micropost = @user.microposts.build(content: "Lorem ipsum")
   end
 
   test "should be valid" do
@@ -27,6 +26,10 @@ class MicropostTest < ActiveSupport::TestCase
   test "content should be at most 140 characters" do
   	@micropost.content = "a"*141
   	assert_not @micropost.valid?
+  end
+
+  test "order should be most recent first" do
+  	assert_equal Micropost.first, microposts(:most_recent)
   end
 end
 
