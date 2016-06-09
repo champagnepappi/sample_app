@@ -49,15 +49,15 @@ class UserTest < ActiveSupport::TestCase
   	end
 
   	test "email addresses should be unique" do
-  	dupilicate_user = @user.dup
-  	dupilicate_user.email = @user.email.upcase
-  	@user.save
-  	assert_not dupilicate_user.valid?
+    	dupilicate_user = @user.dup
+    	dupilicate_user.email = @user.email.upcase
+    	@user.save
+    	assert_not dupilicate_user.valid?
   	end  
 
     test "password should have a minimum length" do
-    @user.password = @user.password_confirmation = "a" * 5
-    assert_not @user.valid?
+      @user.password = @user.password_confirmation = "a" * 5
+      assert_not @user.valid?
   end
 
   test "email addresses should be saved as lower-case" do
@@ -69,5 +69,13 @@ class UserTest < ActiveSupport::TestCase
 
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?('')
+  end
+
+  test "associated microposts should be destroyed" do
+    @user.save
+    @user.microposts.create!(content: "Lorem ipsum")
+    assert_difference 'Micropost.count', -1 do
+      @user.destroy
+    end
   end
 end
