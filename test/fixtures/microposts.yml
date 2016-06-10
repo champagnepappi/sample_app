@@ -20,6 +20,13 @@ most_recent:
   created_at: <%= Time.zone.now %> 
   user: kevin 
 
+<% 30.times do |n| %>
+micropost_<%= n %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= 42.days.ago %>
+  user: kevin 
+<% end %> 
+
 ants:
   content: "Oh, is that what you want? Because that's how you get ants!"
   created_at: <%= 2.years.ago %>
@@ -38,11 +45,4 @@ tone:
 van:
   content: "Dude, this van's, like, rolling propable cause."
   created_at: <%= 4.hours.ago %>
-  user: lana        
-
-<% 30.times do |n| %>
-micropost_<%= n %>:
-  content: <%= Faker::Lorem.sentence(5) %>
-  created_at: <%= 42.days.ago %>
-  user: kevin 
-<% end %>         
+  user: lana                
