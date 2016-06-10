@@ -10,7 +10,6 @@ class MicropostsController < ApplicationController
 			render 'static_pages/home'
 		end
 	end
-	end
 
 	def destroy
 	end

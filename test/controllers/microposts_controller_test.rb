@@ -6,19 +6,19 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
   # end
 
   def setup
-  	@microposts = microposts(:orange)
+  	@micropost = microposts(:orange)
   end
 
   test "should redirect create when not logged in" do
   	assert_no_difference 'Micropost.count' do
-  		post :create, micropost: { content: "Lorem ipsum" }
+  		post microposts_path :create, micropost: { content: "Lorem ipsum" }
   	end
   	assert_redirected_to login_url
   end
 
   test "should redirect destroy when not logged in" do
   	assert_no_difference 'Micropost.count' do
-  		delete :destroy, id: @micropost
+  		delete micropost_path :destroy, id: @micropost
   	end
   	assert_redirected_to login_url
   end
