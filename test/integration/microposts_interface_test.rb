@@ -13,7 +13,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get root_path
     assert_select 'div.pagination'
-    assert_select 'a[href=?]'
+    assert_select 'input[type=file]'
     #Invalid submission
     assert_no_difference 'Micropost.count' do
       post microposts_path, micropost: {content: "" }
@@ -25,7 +25,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     assert_difference 'Micropost.count', 1 do
       post microposts_path, micropost: { content: content , picture: picture }
     end
-    assert picture.picture?
+    assert assigns(:micropost).picture?
     assert_redirected_to root_url
     follow_redirect!
     assert_match content, response.body
@@ -43,7 +43,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
   test "micropost sidebar count" do
     log_in_as(@user)
     get root_path
-    assert_match "#{FILL_IN} microposts", response.body
+    assert_match "#{@user.microposts.count} microposts", response.body
     #User with zero microposts
     other_user = users(:jane)
     log_in_as(other_user)
@@ -51,6 +51,6 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     assert_match "0 microposts", response.body
     other_user.microposts.create!(content: "A micropost")
     get root_path
-    assert_match "0 microposts" , response.body
+    assert_match "1 microposts" , response.body
   end
 end
