@@ -1,0 +1,15 @@
+one:
+  follower: kevin
+  followed: jane
+
+two:
+  follower: kevin
+  followed: junior 
+
+three:
+  follower: jane
+  followed: kevin 
+
+four:
+  follower: dave
+  followed: kevin 
