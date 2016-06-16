@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RelationshipsControllerTest < ActionDispatch::IntegrationTest
+class RelationshipsControllerTest < ActionController::TestCase
  
   test 'create should require logged-in user' do
     assert_no_difference 'Relationship.count' do
