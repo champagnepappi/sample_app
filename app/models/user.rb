@@ -94,10 +94,7 @@ class User < ActiveRecord::Base
 
 	def password_reset_expired?
 		reset_sent_at < 2.hours.ago
-<<<<<<< HEAD
-=======
-		
->>>>>>> account-activation-password-reset
+
 	end
 
 	private

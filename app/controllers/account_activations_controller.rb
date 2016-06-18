@@ -6,9 +6,10 @@ class AccountActivationsController < ApplicationController
 			user.activate
 			log_in user
 			flash[:success] = "Account activated!"
-			redirected_to user
+			redirect_to user
 		else
 			flash[:danger] = "Invalid activation link"
-			redirected_to root_url
+			redirect_to root_url
+		end
 	end
 end
