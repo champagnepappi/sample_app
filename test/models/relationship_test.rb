@@ -3,7 +3,9 @@ require 'test_helper'
 class RelationshipTest < ActiveSupport::TestCase
   
   def setup
-  	@relationship = Relationship.new(follower_id: 1, followed_id: 2)
+    kevin = users(:kevin)
+    junior  = users(:junior)
+  	@relationship = Relationship.new(follower_id: kevin.id, followed_id: junior.id)
   end
 
 

@@ -4,7 +4,7 @@ class FollowingTest < ActionDispatch::IntegrationTest
  
  def setup
  	@user = users(:kevin)
- 	@other = users(:jane)
+ 	@other = users(:dave)
  	log_in_as(@user)
  end
 
@@ -34,7 +34,7 @@ class FollowingTest < ActionDispatch::IntegrationTest
 
  test "should follow a user with Ajax" do
  	assert_difference '@user.following.count', 1 do
- 		xhr :post, relationships_path, followed_id: @other.id
+ 		post relationships_path, xhr: true, params: {followed_id: @other.id}
  	end
  end
 
@@ -47,7 +47,7 @@ class FollowingTest < ActionDispatch::IntegrationTest
  end
 
  test "should unfollow a user with Ajax" do
- 	@user.follow(@user)
+ 	@user.follow(@other)
  	relationship = @user.active_relationships.find_by(followed_id: @other.id)
  	assert_difference '@user.following.count', -1 do
  		xhr :delete, relationship_path(relationship)

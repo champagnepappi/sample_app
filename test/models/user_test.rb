@@ -81,12 +81,12 @@ class UserTest < ActiveSupport::TestCase
 
   test "should follow and unfollow a user" do
     kevin = users(:kevin)
-    junior  = users(:junior)
-    assert_not kevin.following?(junior)
-    kevin.follow(junior)
-    assert kevin.following?(junior)
-    assert junior.followers.include?(kevin)
-    kevin.unfollow(junior)
-    assert_not kevin.following?(junior)
+    dave  = users(:dave)
+    assert_not kevin.following?(dave)
+    kevin.follow(dave)
+    assert kevin.following?(dave)
+    assert dave.followers.include?(kevin)
+    kevin.unfollow(dave)
+    assert_not kevin.following?(dave)
   end
 end
