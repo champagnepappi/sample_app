@@ -50,8 +50,10 @@ class User < ActiveRecord::Base
 		update_attribute(:remember_digest, nil)
 	end
 
+	# Returns a user's status feed
 	def feed
-		Micropost.where("user_id = ?", id)
+		Micropost.where("user_id IN (:following_ids) OR user_id = :user_id",
+		 following_ids: following_ids, user_id: id)
 	end
 
 	# Follows a user
@@ -92,6 +94,7 @@ class User < ActiveRecord::Base
 		UserMailer.password_reset(self).deliver_now
 	end
 
+	# Returns true if password reset expired
 	def password_reset_expired?
 		reset_sent_at < 2.hours.ago
 
